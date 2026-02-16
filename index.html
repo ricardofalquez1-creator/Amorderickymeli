@@ -212,46 +212,61 @@
         createTrail(e.touches[0].clientX, e.touches[0].clientY);
         }, {passive: true});
     
-    function enviarMensaje() {
-        const input = document.getElementById('mensajeInput');
-        if(input.value.trim() === "") return;
+function enviarMensaje() {
+    const input = document.getElementById('mensajeInput');
+    if(input.value.trim() === "") return;
     
-        const password = prompt("Clave secreta:");
+    const password = prompt("Clave secreta:");
     
-    // Aquí validamos en el código para no enviar basura
+    // 1. Verificación local (para no trabajar de más)
     if (password === "CocacolaSprite") {
         const ahora = new Date().toLocaleDateString('es-ES', { 
             day:'numeric', month:'long', year:'numeric' 
         });
 
-        // ENVIAMOS LOS DATOS: Incluimos 'pass' para que Firebase nos deje pasar
+        // 2. Envío a Firebase: Aquí incluimos 'pass' para cumplir con tus Rules
         database.ref('muro').push({
             texto: input.value,
             fecha: ahora,
-            pass: password, // <--- ESTO ES LO QUE TUS REGLAS PIDEN
+            pass: password, // <-- Esto es lo que Firebase exige para dar permiso de escritura
             x: Math.random() * 70 + 15,
             y: Math.random() * 70 + 15
         }).then(() => {
-            input.value = ''; // Limpia el input si tuvo éxito
+            // Si llega aquí, es que Firebase aceptó el mensaje
+            input.value = '';
+            alert("¡Recuerdo guardado para siempre! ✨");
         }).catch((error) => {
-            console.error("Error de Firebase:", error);
-            alert("Error al guardar: Firebase rechazó el mensaje.");
+            // Si sale este error, es que las Rules siguen bloqueando
+            console.error("Error:", error);
+            alert("Firebase rechazó el mensaje. Revisa las Rules.");
         });
     } else { 
         alert("Clave incorrecta 🌹"); 
     }
 }
 
-    database.ref('muro').on('child_added', (snapshot) => {
-        const data = snapshot.val();
+database.ref('muro').on('child_added', (snapshot) => {
+    const data = snapshot.val();
+    
+    // Verificamos que los datos existan antes de intentar crearlos
+    if (data && data.texto) {
         const el = document.createElement('div');
         el.className = 'static-word';
         el.innerText = data.texto;
+        
+        // Usamos la fecha guardada, o un mensaje por defecto si no tiene
         el.setAttribute('data-date', data.fecha || "Recuerdo eterno");
-        el.style.left = data.x + '%'; el.style.top = data.y + '%';
+        
+        // Posicionamiento aleatorio guardado
+        el.style.left = data.x + '%'; 
+        el.style.top = data.y + '%';
+        
+        // Rotación aleatoria visual
         el.style.setProperty('--rot', (Math.random() * 20 - 10) + 'deg');
+        
         document.getElementById('word-wall').appendChild(el);
-    });
+    }
+});
 
     function actualizarContadores() {
         const hoy = new Date();
