@@ -220,29 +220,28 @@ const database = firebase.database();
     
 function enviarMensaje() {
     const input = document.getElementById('mensajeInput');
-    if(input.value.trim() === "") return;
+    const texto = input.value.trim();
+    
+    if(texto === "") return;
     
     const password = prompt("Clave secreta:");
     
-    // 1. Verificación local
+    // La clave se valida aquí en tu página. Si es correcta, envía los datos.
     if (password === "CocacolaSprite") {
         const ahora = new Date().toLocaleDateString('es-ES', { 
             day:'numeric', month:'long', year:'numeric' 
         });
 
-        // 2. Envío a Firebase
         database.ref('muro').push({
-            texto: input.value,
+            texto: texto,
             fecha: ahora,
-            pass: password, // <-- USAMOS LA VARIABLE QUE TIENE EL TEXTO
             x: Math.random() * 70 + 15,
             y: Math.random() * 70 + 15
         }).then(() => {
             input.value = '';
-            alert("¡Recuerdo guardado para siempre! ✨");
+            alert("¡Mensaje guardado! ✨");
         }).catch((error) => {
-            console.error("Error:", error);
-            alert("Firebase rechazó el mensaje. Revisa las Rules.");
+            alert("Hubo un error al conectar con Firebase.");
         });
     } else { 
         alert("Clave incorrecta 🌹"); 
