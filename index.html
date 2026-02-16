@@ -59,52 +59,35 @@
         @keyframes scroll-slow { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-230px * 10)); } }
 
         /* --- SPOTIFY --- */
-        .spotify-container { 
-            margin: 0 auto; z-index: 20; width: 90%; max-width: 400px; border-radius: 15px; 
-            overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
-        }
+        .spotify-container { margin: 0 auto; z-index: 20; width: 90%; max-width: 400px; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 
-        /* --- BOTÓN JUGAR (GENIALLY) --- */
+        /* --- GENIALLY --- */
         .genially-box { width: 100%; display: flex; justify-content: center; margin: 30px 0; z-index: 20; }
         .genially-btn { 
             background: white; color: var(--pink); border: 2px solid var(--pink); padding: 14px 30px; 
             border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.15);
-            transition: 0.3s;
-        }
-        .genially-btn:active { transform: scale(0.95); }
-
-        /* --- INPUT Y BOTÓN DESUSCRIBIR (CORREGIDO CENTRADO) --- */
-        .footer-wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centra todo el contenido hijo horizontalmente */
-            gap: 15px;
-            z-index: 20;
-            margin-top: 10px;
         }
 
-        .input-container { 
-            display: flex; 
-            width: 90%; 
-            max-width: 400px; 
-            gap: 5px; 
-            background: white; 
-            padding: 5px; 
-            border-radius: 50px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+        /* --- MURO (FECHA RECUPERADA) --- */
+        #word-wall { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        .static-word { 
+            position: absolute; color: var(--pink); font-weight: bold; opacity: 0.3; 
+            font-size: 1rem; pointer-events: auto; cursor: help; animation: float 8s infinite alternate;
         }
+        .static-word:hover::after, .static-word:active::after {
+            content: "🌻 " attr(data-date); position: absolute; bottom: 100%; left: 50%;
+            transform: translateX(-50%); background: #795548; color: white;
+            padding: 5px 10px; border-radius: 8px; font-size: 0.75rem; white-space: nowrap; z-index: 100;
+        }
+        @keyframes float { 0% { transform: translateY(0) rotate(var(--rot)); } 100% { transform: translateY(-15px) rotate(var(--rot)); } }
+
+        /* --- FOOTER CENTRADO --- */
+        .footer-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 20; margin-top: 10px; }
+        .input-container { display: flex; width: 90%; max-width: 400px; gap: 5px; background: white; padding: 5px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         input { border: none; padding: 10px 15px; border-radius: 50px; outline: none; flex: 1; font-size: 14px; }
         .send-btn { background: var(--pink); color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: bold; }
+        .unsubscribe-btn { background: none; border: none; color: #888; font-size: 11px; cursor: pointer; opacity: 0.6; text-decoration: underline; }
 
-        .unsubscribe-btn { 
-            background: none; border: none; color: #888; font-size: 11px; 
-            cursor: pointer; opacity: 0.6; text-decoration: underline;
-        }
-
-        /* --- MURO Y OTROS --- */
-        #word-wall { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-        .static-word { position: absolute; color: var(--pink); font-weight: bold; opacity: 0.3; font-size: 1rem; pointer-events: auto; }
         .trail-flower { position: fixed; pointer-events: none; z-index: 9999; font-size: 20px; animation: fadeTrail 0.8s linear forwards; }
         @keyframes fadeTrail { 0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); } 100% { opacity: 0; transform: translate(-50%, -150%) scale(1.2); } }
         #visor-fotos { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
@@ -137,7 +120,7 @@
     </div>
 
     <div class="carousel-container">
-        <div class="carousel-track" id="track">
+        <div class="carousel-track">
             <div class="polaroid"><img src="https://i.postimg.cc/fWrMb98y/Foto1.jpg" onclick="abrirFoto(this.src)"></div>
             <div class="polaroid"><img src="https://i.postimg.cc/fLbhzzXX/Foto3.jpg" onclick="abrirFoto(this.src)"></div>
             <div class="polaroid"><img src="https://i.postimg.cc/g0mW7q2s/Foto2.jpg" onclick="abrirFoto(this.src)"></div>
@@ -152,11 +135,11 @@
     </div>
 
     <div class="spotify-container">
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1E8O7mJ7lH7p7p?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe style="border-radius:12px" src="http://googleusercontent.com/spotify.com/6" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <div class="genially-box">
-        <a href="https://view.genially.com/TU_CODIGO_REAL" target="_blank" style="text-decoration: none;">
+        <a href="https://view.genially.com/TU_LINK" target="_blank" style="text-decoration: none;">
             <button class="genially-btn">🎮 ¡A Jugar!</button>
         </a>
     </div>
@@ -178,7 +161,6 @@
     </div>
 
 <script>
-// --- CONFIGURACIÓN FIREBASE ---
 const firebaseConfig = {
   apiKey: "AIzaSyAWDuppxTJ0YH3PMgy8zERSsZ5CjRI2O-g",
   authDomain: "regalosanvalentin-488f4.firebaseapp.com",
@@ -192,11 +174,9 @@ const firebaseConfig = {
 if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
 const database = firebase.database();
 
-// RASTRO GIRASOLES
 function createTrail(x, y) {
     const trail = document.createElement('div');
-    trail.className = 'trail-flower';
-    trail.innerHTML = '🌻';
+    trail.className = 'trail-flower'; trail.innerHTML = '🌻';
     trail.style.left = x + 'px'; trail.style.top = y + 'px';
     document.body.appendChild(trail);
     setTimeout(() => trail.remove(), 800);
@@ -204,7 +184,6 @@ function createTrail(x, y) {
 document.addEventListener('mousemove', (e) => createTrail(e.clientX, e.clientY));
 document.addEventListener('touchmove', (e) => createTrail(e.touches[0].clientX, e.touches[0].clientY), {passive: true});
 
-// FIREBASE: ENVIAR Y RECIBIR
 function enviarMensaje() {
     const input = document.getElementById('mensajeInput');
     const texto = input.value.trim();
@@ -222,18 +201,19 @@ database.ref('muro').on('child_added', (snap) => {
     const el = document.createElement('div');
     el.className = 'static-word';
     el.innerText = data.texto;
+    // AQUÍ ESTÁ LA MAGIA: Reasignamos el atributo de fecha
+    el.setAttribute('data-date', data.fecha || "Recuerdo eterno");
     el.style.left = data.x + '%'; el.style.top = data.y + '%';
     el.style.setProperty('--rot', (Math.random()*20-10)+'deg');
     document.getElementById('word-wall').appendChild(el);
 });
 
-// CONTADORES (Corregidos a 2024 según tus datos previos)
 function actualizarContadores() {
     const hoy = new Date();
     const diff = (f) => Math.floor((hoy - f) / (1000*60*60*24));
-    document.getElementById('days-met').innerText = diff(new Date(2024, 7, 19)); 
-    document.getElementById('days-out').innerText = diff(new Date(2024, 8, 23));
-    document.getElementById('days-gf').innerText = diff(new Date(2024, 11, 7));
+    document.getElementById('days-met').innerText = diff(new Date(2025, 6, 19)); 
+    document.getElementById('days-out').innerText = diff(new Date(2025, 7, 23));
+    document.getElementById('days-gf').innerText = diff(new Date(2025, 11, 7));
 }
 actualizarContadores();
 
