@@ -224,25 +224,23 @@ function enviarMensaje() {
     
     const password = prompt("Clave secreta:");
     
-    // 1. Verificación local (para no trabajar de más)
+    // 1. Verificación local
     if (password === "CocacolaSprite") {
         const ahora = new Date().toLocaleDateString('es-ES', { 
             day:'numeric', month:'long', year:'numeric' 
         });
 
-        // 2. Envío a Firebase: Aquí incluimos 'pass' para cumplir con tus Rules
+        // 2. Envío a Firebase
         database.ref('muro').push({
             texto: input.value,
             fecha: ahora,
-            pass: CocacolaSprite, // <-- Esto es lo que Firebase exige para dar permiso de escritura
+            pass: password, // <-- USAMOS LA VARIABLE QUE TIENE EL TEXTO
             x: Math.random() * 70 + 15,
             y: Math.random() * 70 + 15
         }).then(() => {
-            // Si llega aquí, es que Firebase aceptó el mensaje
             input.value = '';
             alert("¡Recuerdo guardado para siempre! ✨");
         }).catch((error) => {
-            // Si sale este error, es que las Rules siguen bloqueando
             console.error("Error:", error);
             alert("Firebase rechazó el mensaje. Revisa las Rules.");
         });
@@ -250,7 +248,7 @@ function enviarMensaje() {
         alert("Clave incorrecta 🌹"); 
     }
 }
-
+    
 database.ref('muro').on('child_added', (snapshot) => {
     const data = snapshot.val();
     
