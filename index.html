@@ -14,10 +14,10 @@
             --dark: #1a1a1a;
             --bg: #fff5f7;
             --glass: rgba(255, 255, 255, 0.7);
-            --sunflower: #ffb700; /* Color girasol */
-            --html { scroll-behavior: smooth; }
+            --sunflower: #ffb700;
         }
 
+        html { scroll-behavior: smooth; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
@@ -40,115 +40,59 @@
         h1 { color: var(--pink); font-size: 2rem; text-align: center; margin: 20px 0; font-weight: 900; z-index: 10; text-shadow: 2px 4px 6px rgba(0,0,0,0.05); }
 
         /* --- DASHBOARD --- */
-/* --- DASHBOARD ACTUALIZADO --- */
-.dashboard { 
-    display: grid; 
-    /* Cambiamos esto para que en móviles pequeños se ajusten mejor */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px; 
-    width: 100%; 
-    max-width: 500px; 
-    z-index: 10; 
-    padding: 0 10px;
-}
+        .dashboard { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+            width: 100%; 
+            max-width: 500px; 
+            z-index: 10; 
+            padding: 0 10px;
+        }
 
-/* Ajustamos el tamaño de los textos dentro del corazón para que no se amontonen */
-.heart-clock { 
-    position: relative; 
-    aspect-ratio: 1/1; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
-    animation: heartbeat 3s ease-in-out infinite; 
-}
+        .heart-clock { 
+            position: relative; 
+            aspect-ratio: 1/1; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            animation: heartbeat 3s ease-in-out infinite; 
+        }
 
-.days-value { 
-    font-size: 1.4rem; /* Un poco más pequeño para móviles */
-    font-weight: 900; 
-    color: var(--pink); 
-    margin: 0; 
-}
+        .heart-shape { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            fill: white; /* Corregido color de fondo */
+            filter: drop-shadow(0 5px 15px rgba(255, 77, 109, 0.25)); 
+            z-index: -1; 
+        }
 
-.label { 
-    font-size: 0.55rem; /* Un poco más pequeño para que no se corte el texto */
-    font-weight: bold; 
-    text-transform: uppercase; 
-    color: #666; 
-    padding: 0 5px; 
-    line-height: 1.1;
-}
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
 
-/* --- MEDIA QUERY PARA MÓVILES MUY PEQUEÑOS --- */
-@media (max-width: 360px) {
-    .days-value { font-size: 1.1rem; }
-    .label { font-size: 0.5rem; }
-}
+        .days-value { font-size: 1.3rem; font-weight: 900; color: var(--pink); margin: 0; }
+        .label { font-size: 0.55rem; font-weight: bold; text-transform: uppercase; color: #666; padding: 0 5px; line-height: 1.1; }
 
         /* --- CARRUSEL --- */
-/* --- CARRUSEL MEJORADO --- */
-.carousel-container { 
-    width: 100vw; 
-    height: 300px; /* Aumentamos la altura */
-    z-index: 10; 
-    margin: 20px 0; 
-    overflow: hidden; 
-    display: flex; 
-    align-items: center; 
-    background: rgba(255, 255, 255, 0.1); 
-    backdrop-filter: blur(3px); 
-}
-
-.carousel-track { 
-    display: flex; 
-    /* 60 segundos para que se disfruten más las fotos */
-    animation: scroll-slow 60s linear infinite; 
-}
-
-.polaroid { 
-    background: white; 
-    padding: 10px 10px 25px 10px; /* Más borde blanco abajo tipo Polaroid real */
-    margin: 0 15px; 
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15); 
-    border-radius: 3px; 
-    flex-shrink: 0; 
-    width: 200px; /* Fotos más grandes */
-    transition: transform 0.3s; 
-    cursor: pointer; 
-}
-
-.polaroid img { 
-    width: 100%; 
-    height: 200px; /* Altura proporcional */
-    object-fit: cover; 
-    border-radius: 2px;
-}
-
-/* Efecto al tocar la foto */
-.polaroid:active {
-    transform: scale(1.1) rotate(2deg);
-}
-
-/* Ajuste del desplazamiento (asegúrate de que el número coincida con tus fotos) */
-@keyframes scroll-slow { 
-    0% { transform: translateX(0); } 
-    100% { transform: translateX(calc(-230px * 10)); } /* 230px = ancho foto + margen */
-}
-
-/* --- AJUSTE SPOTIFY PARA MÓVIL --- */
-.spotify-container { 
-    margin: 20px auto; 
-    z-index: 20; 
-    width: 90%; /* Que no toque los bordes del cel */
-    max-width: 400px; 
-    border-radius: 15px; 
-    overflow: hidden; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
-}
+        .carousel-container { 
+            width: 100vw; height: 320px; z-index: 10; margin: 30px 0; overflow: hidden; 
+            display: flex; align-items: center; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(3px); 
+        }
+        .carousel-track { display: flex; animation: scroll-slow 60s linear infinite; }
+        .polaroid { 
+            background: white; padding: 10px 10px 25px 10px; margin: 0 15px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-radius: 2px; flex-shrink: 0; width: 200px; transition: transform 0.3s; cursor: pointer; 
+        }
+        .polaroid img { width: 100%; height: 200px; object-fit: cover; }
+        @keyframes scroll-slow { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-230px * 10)); } }
 
         /* --- SPOTIFY --- */
-        .spotify-container { margin: 10px 0; z-index: 20; width: 100%; max-width: 400px; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); background: var(--glass); border: 1px solid rgba(255,255,255,0.4); }
+        .spotify-container { 
+            margin: 20px auto; z-index: 20; width: 90%; max-width: 400px; border-radius: 15px; 
+            overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); background: var(--glass); border: 1px solid rgba(255,255,255,0.4); 
+        }
 
         /* --- INPUT --- */
         .input-container { margin: 20px 0; display: flex; width: 90%; max-width: 400px; gap: 5px; z-index: 20; background: white; padding: 5px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
@@ -158,47 +102,25 @@
         /* --- MURO DE PALABRAS --- */
         #word-wall { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
         .static-word { 
-            position: absolute; color: var(--pink); font-weight: bold; opacity: 0.2; 
+            position: absolute; color: var(--pink); font-weight: bold; opacity: 0.3; 
             font-size: 1rem; animation: floatAround 8s ease-in-out infinite alternate; 
             pointer-events: auto; cursor: help; 
         }
-        /* Girasol en la fecha */
         .static-word:hover::after {
-            content: "🌻 " attr(data-date); 
-            position: absolute; bottom: 100%; left: 50%;
+            content: "🌻 " attr(data-date); position: absolute; bottom: 100%; left: 50%;
             transform: translateX(-50%); background: #795548; color: white;
             padding: 5px 10px; border-radius: 8px; font-size: 0.75rem; white-space: nowrap; z-index: 100;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         @keyframes floatAround { 0% { transform: translateY(0px) rotate(var(--rot)); } 100% { transform: translateY(-20px) rotate(var(--rot)); } }
 
         /* --- TRAIL GIRASOL --- */
-        .trail-flower { 
-            position: fixed; 
-            pointer-events: none; 
-            z-index: 9999; 
-            font-size: 20px; /* Tamaño del girasol */
-            animation: fadeTrail 0.8s linear forwards; 
-            user-select: none;
-        }
+        .trail-flower { position: fixed; pointer-events: none; z-index: 9999; font-size: 20px; animation: fadeTrail 0.8s linear forwards; }
+        @keyframes fadeTrail { 0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); } 100% { opacity: 0; transform: translate(-50%, -150%) scale(1.2); } }
 
-        @keyframes fadeTrail { 
-            0% { 
-            opacity: 1; 
-            transform: translate(-50%, -50%) scale(0.6) rotate(0deg); 
-        } 
-            100% { 
-            opacity: 0; 
-            transform: translate(-50%, -150%) scale(1.2) rotate(90deg); 
-            } 
-        }
-
-        /* --- ERROR 237 --- */
+        #visor-fotos { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        #foto-grande { max-width: 90%; max-height: 80vh; border: 5px solid white; }
         #forever-overlay { display: none; position: fixed; inset: 0; background: var(--pink); color: white; flex-direction: column; justify-content: center; align-items: center; z-index: 3000; text-align: center; padding: 30px; }
         .unsubscribe-btn { background: none; border: none; color: #bbb; font-size: 10px; cursor: pointer; opacity: 0.5; margin: 20px 0; z-index: 20; }
-        
-        #visor-fotos { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
-        #foto-grande { max-width: 95%; max-height: 80vh; border: 4px solid white; }
     </style>
 </head>
 <body>
@@ -211,17 +133,17 @@
         <div class="heart-clock">
             <svg class="heart-shape" viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,21.2,16,21.2s16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg>
             <p class="days-value" id="days-met">0</p>
-            <p class="label">Días de conocernos</p>
+            <p class="label">días de conocernos</p>
         </div>
         <div class="heart-clock">
             <svg class="heart-shape" viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,21.2,16,21.2s16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg>
             <p class="days-value" id="days-out">0</p>
-            <p class="label">Días desde nuestre primera cita</p>
+            <p class="label">días desde nuestra 1ra cita</p>
         </div>
         <div class="heart-clock">
             <svg class="heart-shape" viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,21.2,16,21.2s16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg>
             <p class="days-value" id="days-gf">0</p>
-            <p class="label">Días desde ser novios</p>
+            <p class="label">días siendo novios</p>
         </div>
     </div>
 
@@ -237,23 +159,12 @@
             <div class="polaroid"><img src="https://i.postimg.cc/J4XC4dD1/Foto7.jpg" onclick="abrirFoto(this.src)"></div>
             <div class="polaroid"><img src="https://i.postimg.cc/nzwfMyGc/Foto4.jpg" onclick="abrirFoto(this.src)"></div>
             <div class="polaroid"><img src="https://i.postimg.cc/gJqqBFN2/Foto11.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/fWrMb98y/Foto1.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/fLbhzzXX/Foto3.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/g0mW7q2s/Foto2.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/N0pWP3V9/Foto9.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/7Pdy4yLM/Foto6.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/Qtzvjpjr/Foto10.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/mkvxy7nX/Foto5.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/J4XC4dD1/Foto7.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/nzwfMyGc/Foto4.jpg" onclick="abrirFoto(this.src)"></div>
-            <div class="polaroid"><img src="https://i.postimg.cc/gJqqBFN2/Foto11.jpg" onclick="abrirFoto(this.src)"></div>
         </div>
     </div>
 
-<div class="spotify-container">
-        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5Nf8YaO5XmmCXB0IovkS7v?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div class="spotify-container">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1E8O77k88vGvXG?utm_source=generator" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
-    <a href="https://open.spotify.com/embed/playlist/5Nf8YaO5XmmCXB0IovkS7v?utm_source=generator" target="_blank" class="spotify-link">♫ Abrir directamente en la App</a>
     
     <div class="input-container">
         <input type="text" id="mensajeInput" placeholder="Añadir un recuerdo eterno...">
@@ -276,56 +187,37 @@ const firebaseConfig = {
   authDomain: "regalosanvalentin-488f4.firebaseapp.com",
   databaseURL: "https://regalosanvalentin-488f4-default-rtdb.firebaseio.com",
   projectId: "regalosanvalentin-488f4",
-  storageBucket: "regalosanvalentin-488f4.firebasestorage.app", // Actualizado
-  messagingSenderId: "606948409590", // Actualizado
-  appId: "1:606948409590:web:93151713372f334eeb2cd7" // Actualizado
+  storageBucket: "regalosanvalentin-488f4.firebasestorage.app",
+  messagingSenderId: "606948409590",
+  appId: "1:606948409590:web:93151713372f334eeb2cd7"
 };
 
-// Inicializar Firebase (Modo Compat)
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
 const database = firebase.database();
 
-// --- El resto de tu código (createTrail, enviarMensaje, etc.) se queda IGUAL ---
+// RASTRO DE GIRASOLES
+function createTrail(x, y) {
+    const trail = document.createElement('div');
+    trail.className = 'trail-flower';
+    trail.innerHTML = '🌻';
+    trail.style.left = x + 'px'; 
+    trail.style.top = y + 'px';
+    document.body.appendChild(trail);
+    setTimeout(() => { if (trail.parentNode) trail.remove(); }, 800);
+}
 
-    // RASTRO DE GIRASOLES CORREGIDO
-    function createTrail(x, y) {
-        const trail = document.createElement('div');
-        trail.className = 'trail-flower'; // Asegúrate que coincida con el CSS
-        trail.innerHTML = '🌻';
-        trail.style.left = x + 'px'; 
-        trail.style.top = y + 'px';
-        document.body.appendChild(trail);
-    
-        // Limpieza automática para que no sature la memoria
-        setTimeout(() => {
-            if (trail.parentNode) {
-                trail.remove();
-        }
-            }, 800);
-        }
+document.addEventListener('mousemove', (e) => createTrail(e.clientX, e.clientY));
+document.addEventListener('touchmove', (e) => createTrail(e.touches[0].clientX, e.touches[0].clientY), {passive: true});
 
-        // Eventos para PC y Móvil
-        document.addEventListener('mousemove', (e) => createTrail(e.clientX, e.clientY));
-        document.addEventListener('touchmove', (e) => {
-        createTrail(e.touches[0].clientX, e.touches[0].clientY);
-        }, {passive: true});
-    
+// ENVIAR MENSAJE
 function enviarMensaje() {
     const input = document.getElementById('mensajeInput');
     const texto = input.value.trim();
-    
     if(texto === "") return;
     
     const password = prompt("Clave secreta:");
-    
-    // La clave se valida aquí en tu página. Si es correcta, envía los datos.
     if (password === "CocacolaSprite") {
-        const ahora = new Date().toLocaleDateString('es-ES', { 
-            day:'numeric', month:'long', year:'numeric' 
-        });
-
+        const ahora = new Date().toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
         database.ref('muro').push({
             texto: texto,
             fecha: ahora,
@@ -334,49 +226,39 @@ function enviarMensaje() {
         }).then(() => {
             input.value = '';
             alert("¡Mensaje guardado! ✨");
-        }).catch((error) => {
-            alert("Hubo un error al conectar con Firebase.");
-        });
-    } else { 
-        alert("Clave incorrecta 🌹"); 
-    }
+        }).catch(() => alert("Error de conexión. Revisa las Rules."));
+    } else { alert("Clave incorrecta 🌹"); }
 }
-    
+
+// CARGAR MENSAJES
 database.ref('muro').on('child_added', (snapshot) => {
     const data = snapshot.val();
-    
-    // Verificamos que los datos existan antes de intentar crearlos
     if (data && data.texto) {
         const el = document.createElement('div');
         el.className = 'static-word';
         el.innerText = data.texto;
-        
-        // Usamos la fecha guardada, o un mensaje por defecto si no tiene
         el.setAttribute('data-date', data.fecha || "Recuerdo eterno");
-        
-        // Posicionamiento aleatorio guardado
         el.style.left = data.x + '%'; 
         el.style.top = data.y + '%';
-        
-        // Rotación aleatoria visual
         el.style.setProperty('--rot', (Math.random() * 20 - 10) + 'deg');
-        
         document.getElementById('word-wall').appendChild(el);
     }
 });
 
-    function actualizarContadores() {
-        const hoy = new Date();
-        const diff = (f) => Math.floor((hoy - f) / (1000 * 60 * 60 * 24));
-        document.getElementById('days-met').innerText = diff(new Date(2025, 7, 19));
-        document.getElementById('days-out').innerText = diff(new Date(2025, 8, 23));
-        document.getElementById('days-gf').innerText = diff(new Date(2025, 11, 7));
-    }
-    actualizarContadores();
-    function abrirFoto(src) { document.getElementById('foto-grande').src = src; document.getElementById('visor-fotos').style.display = 'flex'; }
-    function cerrarFoto() { document.getElementById('visor-fotos').style.display = 'none'; }
-    function mostrarError() { document.getElementById('forever-overlay').style.display = 'flex'; }
-    function cerrarError() { document.getElementById('forever-overlay').style.display = 'none'; }
+// CONTADORES
+function actualizarContadores() {
+    const hoy = new Date();
+    const diff = (f) => Math.floor((hoy - f) / (1000 * 60 * 60 * 24));
+    document.getElementById('days-met').innerText = diff(new Date(2025, 6, 19)); // Meses en JS empiezan en 0 (Julio=6, Agosto=7)
+    document.getElementById('days-out').innerText = diff(new Date(2025, 7, 23));
+    document.getElementById('days-gf').innerText = diff(new Date(2025, 11, 7));
+}
+actualizarContadores();
+
+function abrirFoto(src) { document.getElementById('foto-grande').src = src; document.getElementById('visor-fotos').style.display = 'flex'; }
+function cerrarFoto() { document.getElementById('visor-fotos').style.display = 'none'; }
+function mostrarError() { document.getElementById('forever-overlay').style.display = 'flex'; }
+function cerrarError() { document.getElementById('forever-overlay').style.display = 'none'; }
 </script>
 </body>
 </html>
