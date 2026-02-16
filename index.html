@@ -79,10 +79,24 @@
         @keyframes floatAround { 0% { transform: translateY(0px) rotate(var(--rot)); } 100% { transform: translateY(-20px) rotate(var(--rot)); } }
 
         /* --- TRAIL GIRASOL --- */
-        .trail-flower { position: fixed; pointer-events: none; z-index: 9999; font-size: 18px; animation: fadeTrail 0.8s linear forwards; }
+        .trail-flower { 
+            position: fixed; 
+            pointer-events: none; 
+            z-index: 9999; 
+            font-size: 20px; /* Tamaño del girasol */
+            animation: fadeTrail 0.8s linear forwards; 
+            user-select: none;
+        }
+
         @keyframes fadeTrail { 
-            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5) rotate(0deg); } 
-            100% { opacity: 0; transform: translate(-50%, -120%) scale(1.5) rotate(45deg); } 
+            0% { 
+            opacity: 1; 
+            transform: translate(-50%, -50%) scale(0.6) rotate(0deg); 
+        } 
+            100% { 
+            opacity: 0; 
+            transform: translate(-50%, -150%) scale(1.2) rotate(90deg); 
+            } 
         }
 
         /* --- ERROR 237 --- */
@@ -175,18 +189,29 @@
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
-    // RASTRO DE GIRASOLES
+    // RASTRO DE GIRASOLES CORREGIDO
     function createTrail(x, y) {
         const trail = document.createElement('div');
-        trail.className = 'trail-flower';
+        trail.className = 'trail-flower'; // Asegúrate que coincida con el CSS
         trail.innerHTML = '🌻';
-        trail.style.left = x + 'px'; trail.style.top = y + 'px';
+        trail.style.left = x + 'px'; 
+        trail.style.top = y + 'px';
         document.body.appendChild(trail);
-        setTimeout(() => trail.remove(), 800);
-    }
-    document.addEventListener('mousemove', (e) => createTrail(e.clientX, e.clientY));
-    document.addEventListener('touchmove', (e) => createTrail(e.touches[0].clientX, e.touches[0].clientY), {passive: true});
+    
+        // Limpieza automática para que no sature la memoria
+        setTimeout(() => {
+            if (trail.parentNode) {
+                trail.remove();
+        }
+            }, 800);
+        }
 
+        // Eventos para PC y Móvil
+        document.addEventListener('mousemove', (e) => createTrail(e.clientX, e.clientY));
+        document.addEventListener('touchmove', (e) => {
+        createTrail(e.touches[0].clientX, e.touches[0].clientY);
+        }, {passive: true});
+    
     function enviarMensaje() {
         const input = document.getElementById('mensajeInput');
         if(input.value.trim() === "") return;
