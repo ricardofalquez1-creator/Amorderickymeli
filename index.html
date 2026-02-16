@@ -215,18 +215,32 @@
     function enviarMensaje() {
         const input = document.getElementById('mensajeInput');
         if(input.value.trim() === "") return;
+    
         const password = prompt("Clave secreta:");
-        if (password === "CocacolaSprite") {
-            const ahora = new Date().toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
-            database.ref('muro').push({
-                texto: input.value,
-                fecha: ahora,
-                x: Math.random() * 70 + 15,
-                y: Math.random() * 70 + 15
-            });
-            input.value = '';
-        } else { alert("Clave incorrecta 🌹"); }
+    
+    // Aquí validamos en el código para no enviar basura
+    if (password === "CocacolaSprite") {
+        const ahora = new Date().toLocaleDateString('es-ES', { 
+            day:'numeric', month:'long', year:'numeric' 
+        });
+
+        // ENVIAMOS LOS DATOS: Incluimos 'pass' para que Firebase nos deje pasar
+        database.ref('muro').push({
+            texto: input.value,
+            fecha: ahora,
+            pass: password, // <--- ESTO ES LO QUE TUS REGLAS PIDEN
+            x: Math.random() * 70 + 15,
+            y: Math.random() * 70 + 15
+        }).then(() => {
+            input.value = ''; // Limpia el input si tuvo éxito
+        }).catch((error) => {
+            console.error("Error de Firebase:", error);
+            alert("Error al guardar: Firebase rechazó el mensaje.");
+        });
+    } else { 
+        alert("Clave incorrecta 🌹"); 
     }
+}
 
     database.ref('muro').on('child_added', (snapshot) => {
         const data = snapshot.val();
