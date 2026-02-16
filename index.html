@@ -177,17 +177,23 @@
     </div>
 
 <script>
-    const firebaseConfig = {
-        apiKey: "AIzaSyAWDuppxTJ0YH3PMgy8zERSsZ5CjRI2O-g",
-        authDomain: "regalosanvalentin-488f4.firebaseapp.com",
-        databaseURL: "https://regalosanvalentin-488f4-default-rtdb.firebaseio.com",
-        projectId: "regalosanvalentin-488f4",
-        storageBucket: "regalosanvalentin-488f4.firebasestorage.app",
-        messagingSenderId: "606948409590",
-        appId: "1:606948409590:web:93151713372f334eeb2cd7"
-    };
+const firebaseConfig = {
+  apiKey: "AIzaSyAWDuppxTJ0YH3PMgy8zERSsZ5CjRI2O-g",
+  authDomain: "regalosanvalentin-488f4.firebaseapp.com",
+  databaseURL: "https://regalosanvalentin-488f4-default-rtdb.firebaseio.com",
+  projectId: "regalosanvalentin-488f4",
+  storageBucket: "regalosanvalentin-488f4.firebasestorage.app", // Actualizado
+  messagingSenderId: "606948409590", // Actualizado
+  appId: "1:606948409590:web:93151713372f334eeb2cd7" // Actualizado
+};
+
+// Inicializar Firebase (Modo Compat)
+if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
+}
+const database = firebase.database();
+
+// --- El resto de tu código (createTrail, enviarMensaje, etc.) se queda IGUAL ---
 
     // RASTRO DE GIRASOLES CORREGIDO
     function createTrail(x, y) {
