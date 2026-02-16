@@ -234,7 +234,7 @@ function enviarMensaje() {
         database.ref('muro').push({
             texto: input.value,
             fecha: ahora,
-            pass: password, // <-- Esto es lo que Firebase exige para dar permiso de escritura
+            pass: CocacolaSprite, // <-- Esto es lo que Firebase exige para dar permiso de escritura
             x: Math.random() * 70 + 15,
             y: Math.random() * 70 + 15
         }).then(() => {
